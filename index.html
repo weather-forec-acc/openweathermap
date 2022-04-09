@@ -3,10 +3,10 @@
   <head>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="shortcut icon" type="image/x-icon" href="/favicon.ico">
-	<script src="jquery-3.2.1.min.js"></script>
-	<script src="highcharts.js"></script>
-	<script src="load_forecasts.js"></script>
-	<link rel="stylesheet" href="main.css">
+	<script src="js/jquery-3.2.1.min.js"></script>
+	<script src="js/highcharts.js"></script>
+	<script src="js/load_forecasts.js"></script>
+	<link rel="stylesheet" href="css/main.css">
 	
   </head>
   <body>
@@ -46,9 +46,9 @@
 	    xhr.send();
 	  }
 	
-	  load_page('home');
-	  load_page('forecasts');
-	  load_page('about');
+	  load_page('pages/home.html');
+	  load_page('pages/forecasts');
+	  load_page('pages/about');
 	  // Get the element with id="defaultOpen" and click on it
 	  document.getElementById("defaultOpen").click();
 	</script>	  
