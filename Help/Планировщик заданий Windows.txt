@@ -1,0 +1,16 @@
+02-04-2022 Планировщик заданий Windows 10.
+Как создать задачу с запуском скрипта.
+
+Работает в cmd:
+"C:\Program Files\Git\git-bash.exe" && node D:\MEGAsync\Openweathermap\server\forecasts.js
+или
+"C:\Program Files\Git\git-bash.exe" --a -i -c && node D:\MEGAsync\Openweathermap\server\forecasts.js
+Но это не работает в Панировщике.
+
+Работает такой вариант:
+- программа: "C:\Program Files\nodejs\node.exe"
+- аргумент: D:\MEGAsync\Openweathermap\server\forecasts.js
+
+Как включит журнал:
+Программа "Просмотр событий":
+- "Журнал приложений и служб -> Microsoft -> Windows -> TaskScheduler -> Работает -> Включит журнал (справа).

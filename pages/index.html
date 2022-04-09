@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+  <head>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="shortcut icon" type="image/x-icon" href="/favicon.ico">
+	<script src="jquery-3.2.1.min.js"></script>
+	<script src="highcharts.js"></script>
+	<script src="load_forecasts.js"></script>
+	<link rel="stylesheet" href="main.css">
+	
+  </head>
+  <body>
+	<div class="tab">
+	  <button class="tablinks" onclick="openTab(event, 'home')" id="defaultOpen">Home</button>
+	  <button class="tablinks" onclick="openTab(event, 'forecasts')">Forecasts</button>
+	  <button class="tablinks" onclick="openTab(event, 'about')">About</button>
+	</div>
+
+	<div id="home" class="tabcontent"></div>
+	<div id="forecasts" class="tabcontent"></div>
+	<div id="about" class="tabcontent"></div>
+
+	<script>
+	  function openTab(evt, tabName) {
+		var i, tabcontent, tablinks;
+		tabcontent = document.getElementsByClassName("tabcontent");
+		for (i = 0; i < tabcontent.length; i++) {
+		  tabcontent[i].style.display = "none";
+		}
+		tablinks = document.getElementsByClassName("tablinks");
+		for (i = 0; i < tablinks.length; i++) {
+		  tablinks[i].className = tablinks[i].className.replace(" active", "");
+		}
+		document.getElementById(tabName).style.display = "block";
+		evt.currentTarget.className += " active";
+	  }
+	  
+	  function load_page(page_name) {
+	    var xhr= new XMLHttpRequest();
+	    xhr.open('GET', page_name, true);
+	    xhr.onreadystatechange= function() {
+		  if (this.readyState!==4) return;
+		  if (this.status!==200) return; // or whatever error handling you want
+		    document.getElementById(page_name).innerHTML= this.responseText;
+	    };
+	    xhr.send();
+	  }
+	
+	  load_page('home');
+	  load_page('forecasts');
+	  load_page('about');
+	  // Get the element with id="defaultOpen" and click on it
+	  document.getElementById("defaultOpen").click();
+	</script>	  
+	  
+	<script>	  
+	  // Последний прогноз
+	  $.ajax({
+		url: "/last",
+		contentType: "application/json",
+		dataType : "json",
+		processData: false,
+		complete: function (data) {
+		  // 0: {id: 45, temp_max: Array(8), temp_min: Array(8), clouds: Array(8), prob_prec: Array(8), …}
+		  var last_statistics = JSON.parse(data.responseText);
+		  print_forecast(last_statistics);
+		}
+	  });
+	  
+	</script>
+	
+</body>
+</html> 
